@@ -1,3 +1,4 @@
+
 name: Build SYSTEM SOLO APK
 
 on:
@@ -28,11 +29,12 @@ jobs:
         with:
           gradle-version: '8.13'
 
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
+      - name: Accept Android SDK licenses
+        run: yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses
 
       - name: Install Android SDK components
-        run: sdkmanager --install "platform-tools" "platforms;android-35" "build-tools;35.0.0"
+        run: |
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --install "platform-tools" "platforms;android-35" "build-tools;35.0.0"
 
       - name: Extract project ZIP
         run: |
